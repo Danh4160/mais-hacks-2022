@@ -30,12 +30,8 @@ def open_file():
         page_content = convert(page_content)
         browse_text.set("Browse")
         print(page_content)
-        print(main(page_content))
+        main(page_content)
     
-
-
-    
-
 #browse button
 browse_text = tkinter.StringVar()
 browse_btn = tkinter.Button(root, textvariable=browse_text, command=lambda:open_file(), font="Raleway", bg="#20bebe", fg="white", height=2, width=15)
