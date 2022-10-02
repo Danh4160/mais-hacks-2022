@@ -10,15 +10,16 @@ canvas = tkinter.Canvas(root, width=600, height=100)
 canvas.grid(columnspan=3, rowspan=3)
 
 #logo
-logo = Image.open(r'.\resume_parser\pics\news_thumb_kv.png')
+logo = Image.open(r'.\resume_parser\pics\logo-no-background.png')
 logo = ImageTk.PhotoImage(logo)
-logo_label = tkinter.Label(image=logo)
-logo_label.image = logo
-logo_label.grid(column=1, row=0)
+
+w = tkinter.Label(root, image=logo)
+w.place(x=425,y=275)
+
 
 #instructions
 instructions = tkinter.Label(root, text="Select a PDF file on your computer to extract all its text", font="Raleway")
-instructions.grid(columnspan=3, column=0, row=1)
+instructions.place(x=740,y=650)
 
 def open_file():
     browse_text.set("loading...")
@@ -36,9 +37,10 @@ def open_file():
 browse_text = tkinter.StringVar()
 browse_btn = tkinter.Button(root, textvariable=browse_text, command=lambda:open_file(), font="Raleway", bg="#20bebe", fg="white", height=2, width=15)
 browse_text.set("Browse")
-browse_btn.grid(column=1, row=3)
+browse_btn.place(x=850,y=700)
 
 #canvas = tkinter.Canvas(root, width=600, height=250)
 canvas.grid(columnspan=3)
 
+root.attributes('-fullscreen', True)
 root.mainloop()

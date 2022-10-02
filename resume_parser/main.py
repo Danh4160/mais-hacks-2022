@@ -8,7 +8,7 @@ import os
 import pandas as pd
 import matplotlib.pyplot as plt
 import math
-# nltk.download()
+#nltk.download()
 
 def ProperNounExtractor(text):
     frequencies = {}
