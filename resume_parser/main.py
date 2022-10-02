@@ -6,6 +6,8 @@ from nltk.tokenize import word_tokenize, sent_tokenize
 from model import modifiedknn
 import os
 import pandas as pd
+import matplotlib.pyplot as plt
+import math
 # nltk.download()
 
 def ProperNounExtractor(text):
@@ -43,4 +45,18 @@ def main(pdf_text):
     df_resume = set_resume_dataset()
     knn = modifiedknn(df_resume, pdf_text)
     dict_corr = knn.calculate_correlations()
-    return dict_corr
+    dict_corr.update((key, value*100) for key, value in dict_corr.items())
+    create_graph(dict_corr)
+    
+def create_graph(dict_corr):
+    keys = dict_corr.keys()
+    keys_list = list(keys)
+    values = dict_corr.values()
+    values_list = list(values)
+
+    plt.barh(keys_list, values_list)
+    plt.title("Correlation between your Resume and different positions.")
+    plt.xlabel('Correlation (%)')
+    plt.ylabel('Position')
+    plt.show()
+
