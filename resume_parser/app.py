@@ -3,6 +3,7 @@ import PyPDF2
 from tkinter.filedialog import askopenfile
 from converter import convert
 from PIL import Image,ImageTk
+from main import main
 
 root = tkinter.Tk()
 canvas = tkinter.Canvas(root, width=600, height=100)
@@ -28,9 +29,12 @@ def open_file():
         page_content = page.extractText()
         page_content = convert(page_content)
         browse_text.set("Browse")
+        print(page_content)
+        print(main(page_content))
     
-    print(page_content)
-    return page_content
+
+
+    
 
 #browse button
 browse_text = tkinter.StringVar()
