@@ -1,12 +1,13 @@
-# %%
+
 import pandas as pd
 import nltk
-# Importing the required libraries
 from nltk.corpus import stopwords 
 from nltk.tokenize import word_tokenize, sent_tokenize
 from model import modifiedknn
+import os
+import pandas as pd
 # nltk.download()
-# %%
+
 def ProperNounExtractor(text):
     frequencies = {}
     sentences = nltk.sent_tokenize(text)
@@ -31,21 +32,15 @@ def Relative_Frequencies(frequency):
     return new
         
 def set_resume_dataset():
-    df = pd.read_csv("./UpdatedResumeDataSet.csv")
+    df = pd.read_csv(os.path.join(os.path.dirname(__file__), "./data/UpdatedResumeDataSet.csv"))
     df = df.groupby(['Category'])['Resume'].apply(lambda x: ','.join(x)).reset_index()
     df = df.replace(r'[^\w\s]|_', '', regex=True)
     df['Frequencies'] = df['Resume'].apply(ProperNounExtractor)
     df['Frequencies Relative'] = df['Frequencies'].apply(Relative_Frequencies)
     return df
 
-# %%
-def main():
+def main(pdf_text):
     df_resume = set_resume_dataset()
-    sampleText = df_resume.iloc[[1]]['Frequencies Relative'][1].keys() # output of pdf should be list
-    knn = modifiedknn(df_resume, sampleText)
+    knn = modifiedknn(df_resume, pdf_text)
     dict_corr = knn.calculate_correlations()
     return dict_corr
-
-# %%
-if __name__ == "__main__":
-    main()
