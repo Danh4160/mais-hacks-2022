@@ -4,17 +4,15 @@ import nltk
 # Importing the required libraries
 from nltk.corpus import stopwords 
 from nltk.tokenize import word_tokenize, sent_tokenize
-#nltk.download()
-from textblob import TextBlob
-
-
+from model import modifiedknn
+# nltk.download()
+# %%
 def ProperNounExtractor(text):
-    
     frequencies = {}
     sentences = nltk.sent_tokenize(text)
     for sentence in sentences:
         words = nltk.word_tokenize(sentence)
-        words = [word for word in words if word not in set(stopwords.words('english'))]
+        words = [word for word in words if word.lower() not in set(stopwords.words('english'))]
         tagged = nltk.pos_tag(words)
         for (word, tag) in tagged:
             if tag == 'NN': # If the word is a proper noun
@@ -30,36 +28,24 @@ def Relative_Frequencies(frequency):
     for word, frequencies in frequency.items():
         new_frequencies = frequencies/total
         new[word] = new_frequencies
-
-
-        
-
     return new
         
-
-df = pd.read_csv("./UpdatedResumeDataSet.csv")
-
-original = df
-##print(df.head)
-
-# df.loc[-1] = ['HI', 'SHEESH']  # adding a row
-# df.index = df.index + 1  # shifting index
-
-# df.loc[-1] = ['HI', 'HOHOHOHO, i am good at this maybe?????']  # adding a row
-# df.index = df.index + 1  # shifting index
-
-df = df.groupby(['Category'])['Resume'].apply(lambda x: ','.join(x)).reset_index()
-
-
-
-df = df.replace(r'[^\w\s]|_', '', regex=True)
-
-df['Frequencies'] = df['Resume'].apply(ProperNounExtractor)
-
-df['Frequencies Relative'] = df['Frequencies'].apply(Relative_Frequencies)
-
-
-
-
+def set_resume_dataset():
+    df = pd.read_csv("./UpdatedResumeDataSet.csv")
+    df = df.groupby(['Category'])['Resume'].apply(lambda x: ','.join(x)).reset_index()
+    df = df.replace(r'[^\w\s]|_', '', regex=True)
+    df['Frequencies'] = df['Resume'].apply(ProperNounExtractor)
+    df['Frequencies Relative'] = df['Frequencies'].apply(Relative_Frequencies)
+    return df
 
 # %%
+def main():
+    df_resume = set_resume_dataset()
+    sampleText = df_resume.iloc[[1]]['Frequencies Relative'][1].keys() # output of pdf should be list
+    knn = modifiedknn(df_resume, sampleText)
+    dict_corr = knn.calculate_correlations()
+    return dict_corr
+
+# %%
+if __name__ == "__main__":
+    main()
