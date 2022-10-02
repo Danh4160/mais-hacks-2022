@@ -2,7 +2,7 @@
 
 ## Members
 * Dan Hosi
-* Yjiv Luckheenarain
+* Yajiv Luckheenarain
 * Harsh Patel
 * Ehsan Ahmed
 
