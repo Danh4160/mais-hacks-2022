@@ -19,3 +19,10 @@ pip install -r requirements.txt
 
 ## 2. Enjoy the analysis
 ![A test image](image.png)
+
+
+# Acknowledgements
+We would like to thank the MAIS organizers and the guests that attended and helped run the MAIS HACKS 2022 event.
+
+# Reference Cited
+Bird, Steven, Edward Loper and Ewan Klein (2009), Natural Language Processing with Python. O’Reilly Media Inc.
