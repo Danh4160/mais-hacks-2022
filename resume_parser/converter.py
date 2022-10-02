@@ -7,13 +7,7 @@ from PyPDF2 import PdfReader
 import re
 
 
-def convert(filename):
-
-    reader = PdfReader(filename)
-    text = ""
-    for page in reader.pages:
-        text += page.extract_text() + "\n"
-
+def convert(text):
 
     #text2 = re.split(';|•.:_=-/|\*|\\n', text)
 
