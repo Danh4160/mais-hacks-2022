@@ -35,7 +35,6 @@ def convert(text):
 
     #text2 = re.sub(r'\W+', '', text)
 
-
     text3 = ""
     for line in text2prime:
         words = line.split(" ")
@@ -43,7 +42,7 @@ def convert(text):
             if (word != " " and len(word.strip()) != 0 and word != '\n'):
                 text3 += word.strip() + "\n"
 
-    return text3
+    return text3.split("\n")
 
 #words = text.split(" ")
 
