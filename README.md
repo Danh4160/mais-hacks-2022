@@ -14,11 +14,11 @@ pip install -r requirements.txt
 
 # How can Resume Helper boost your CV!
 ## 1. Drop your resume
-![A test image](image.png)
+![A test image](barGraph.png)
 
 
 ## 2. Enjoy the analysis
-![A test image](image.png)
+![Analysis](https://github.com/Danh4160/mais-hacks-2022/blob/main/resume_parser/pics/barGraph.png)
 
 
 # Acknowledgements
