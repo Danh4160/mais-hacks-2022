@@ -6,7 +6,7 @@ from PIL import Image,ImageTk
 from main import main
 
 root = tkinter.Tk()
-canvas = tkinter.Canvas(root, width=600, height=100)
+canvas = tkinter.Canvas(root, width=600, height=600)
 canvas.grid(columnspan=3, rowspan=3)
 
 #logo
@@ -14,12 +14,12 @@ logo = Image.open(r'.\resume_parser\pics\logo-no-background.png')
 logo = ImageTk.PhotoImage(logo)
 
 w = tkinter.Label(root, image=logo)
-w.place(x=425,y=275)
+w.place(x=175, y=100)
 
 
 #instructions
 instructions = tkinter.Label(root, text="Select a PDF file on your computer to extract all its text", font="Raleway")
-instructions.place(x=740,y=650)
+instructions.place(x=450, y=600)
 
 def open_file():
     browse_text.set("loading...")
@@ -37,10 +37,9 @@ def open_file():
 browse_text = tkinter.StringVar()
 browse_btn = tkinter.Button(root, textvariable=browse_text, command=lambda:open_file(), font="Raleway", bg="#20bebe", fg="white", height=2, width=15)
 browse_text.set("Browse")
-browse_btn.place(x=850,y=700)
+browse_btn.place(x=600,y=625)
 
-#canvas = tkinter.Canvas(root, width=600, height=250)
-canvas.grid(columnspan=3)
+#canvas.grid(columnspan=3)
 
 root.attributes('-fullscreen', True)
 root.mainloop()
